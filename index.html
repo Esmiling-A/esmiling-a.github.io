@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#7569c8">
+<title>大学Online｜测测你的大学人格</title>
+<style>
+:root{--ink:#26243b;--muted:#77758d;--purple:#7669c8;--purple2:#eeeaff;--blue:#e9f4ff;--paper:#fff;--line:#e8e5f2;--bg:#f6f5fb;--green:#e8f6ef;--peach:#fff0e6;--pink:#ffedf4;--shadow:0 18px 50px rgba(48,40,95,.10)}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(circle at 10% 0%,#eeebff 0,transparent 35%),radial-gradient(circle at 95% 15%,#e5f5ff 0,transparent 28%),var(--bg);font-family:system-ui,-apple-system,"Segoe UI","Microsoft YaHei",sans-serif;color:var(--ink);line-height:1.65}
+button{font:inherit;cursor:pointer}
+button:focus-visible,input:focus-visible{outline:3px solid #a9a0ff;outline-offset:3px}
+.wrap{width:min(920px,calc(100% - 28px));margin:0 auto;padding:22px 0 48px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}
+.brand{font-weight:850;letter-spacing:.02em}.brand span{color:var(--purple)}
+.pill{font-size:.78rem;background:#fff;border:1px solid var(--line);border-radius:99px;padding:5px 10px;color:var(--muted)}
+.hero,.panel{background:rgba(255,255,255,.92);border:1px solid rgba(232,229,242,.9);border-radius:26px;box-shadow:var(--shadow)}
+.hero{overflow:hidden}
+.hero-art{min-height:200px;padding:26px 20px;display:grid;place-items:center;text-align:center;background:linear-gradient(130deg,#ded8ff,#d9edff 58%,#fff0e8);position:relative}
+.pixel-sky{font-size:clamp(2.7rem,8vw,5.2rem);line-height:1.2;filter:drop-shadow(0 8px 0 rgba(98,83,167,.08))}
+.stars{letter-spacing:.7rem;color:#8e80da;font-size:1rem;margin-bottom:10px}
+.hero-body{padding:clamp(22px,5vw,42px);text-align:center}
+h1{font-size:clamp(2rem,5vw,3.25rem);line-height:1.15;margin:8px 0 12px;letter-spacing:-.04em}
+h2{font-size:clamp(1.45rem,3.5vw,2rem);line-height:1.25;margin:0 0 10px}
+h3{margin:0 0 8px;font-size:1.1rem}
+p{margin:8px 0 14px}.muted{color:var(--muted)}.small{font-size:.88rem}
+.btn{border:0;border-radius:14px;padding:12px 19px;font-weight:750;transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translateY(-1px)}
+.primary{background:var(--purple);color:white;box-shadow:0 7px 18px rgba(118,105,200,.24)}
+.secondary{background:#f1effb;color:var(--purple);border:1px solid #e1dcfb}
+.ghost{background:white;color:var(--muted);border:1px solid var(--line)}
+.btnrow{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:20px}
+.disclaimer{font-size:.8rem;color:var(--muted);max-width:650px;margin:18px auto 0}
+.features{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:16px}
+.feature{background:rgba(255,255,255,.8);border:1px solid var(--line);border-radius:17px;padding:15px;text-align:center}
+.feature strong{display:block;font-size:.95rem}.feature span{font-size:.8rem;color:var(--muted)}
+.panel{padding:clamp(18px,4vw,34px)}
+.hidden{display:none!important}
+.progressrow{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px;font-size:.88rem;color:var(--muted)}
+.progress{height:8px;background:#eeeaf8;border-radius:99px;overflow:hidden;margin-bottom:26px}
+.progress>div{height:100%;background:linear-gradient(90deg,#8275d7,#74b5dc);border-radius:99px;transition:width .25s}
+.topic{font-size:.78rem;color:var(--purple);font-weight:800;letter-spacing:.06em;margin-bottom:8px}
+.question{font-size:clamp(1.25rem,3vw,1.7rem);font-weight:800;line-height:1.45;margin:0 0 22px}
+.options{display:grid;gap:11px}
+.option{display:flex;align-items:flex-start;gap:12px;padding:15px;border:1.5px solid var(--line);border-radius:16px;background:#fff;text-align:left;color:var(--ink);width:100%;line-height:1.55}
+.option:hover{border-color:#b8b0f0;background:#fcfbff}
+.option.selected{border-color:var(--purple);background:#f2efff;box-shadow:0 0 0 2px rgba(118,105,200,.08)}
+.letter{flex:0 0 29px;height:29px;border-radius:10px;display:grid;place-items:center;background:#f0eef9;color:var(--purple);font-weight:850}
+.option.selected .letter{background:var(--purple);color:white}
+.navrow{display:flex;justify-content:space-between;gap:10px;margin-top:24px}
+.navrow .btn{min-width:115px}
+.notice{padding:12px 14px;background:#fff8e9;border:1px solid #f3e4be;border-radius:13px;color:#785d23;font-size:.88rem;margin-top:14px}
+.reporthead{padding:25px;border-radius:22px;background:linear-gradient(130deg,#eeeaff,#e7f5ff 65%,#fff1e7);text-align:center}
+.emoji{font-size:3.3rem;line-height:1.2}.type-title{font-size:clamp(1.8rem,5vw,2.6rem);font-weight:900;line-height:1.2;margin:8px 0}
+.reportgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:15px}
+.reportcard{border:1px solid var(--line);border-radius:18px;padding:18px;background:#fff}
+.reportcard.full{grid-column:1/-1}
+.bars{display:grid;gap:13px;margin-top:15px}
+.barlabel{display:flex;justify-content:space-between;gap:10px;font-size:.9rem;margin-bottom:5px}
+.bartrack{height:9px;border-radius:99px;background:#eeeaf6;overflow:hidden}
+.barfill{height:100%;border-radius:99px;background:linear-gradient(90deg,#8476d8,#72b5d7)}
+ul{padding-left:1.25rem;margin:8px 0}li{margin:5px 0}
+.tag{display:inline-block;border-radius:99px;background:#f0eefb;color:#6a5db7;padding:4px 10px;font-size:.8rem;margin:4px 4px 0 0}
+.quote{background:#f6f4ff;border-radius:15px;padding:16px;font-weight:700}
+.foot{text-align:center;color:var(--muted);font-size:.8rem;margin-top:22px}
+#toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#2e2b45;color:#fff;padding:10px 15px;border-radius:99px;font-size:.9rem;box-shadow:var(--shadow);z-index:10}
+@media(max-width:640px){.features{grid-template-columns:1fr}.feature{display:flex;justify-content:space-between;align-items:center;text-align:left}.reportgrid{grid-template-columns:1fr}.reportcard.full{grid-column:auto}.hero-art{min-height:150px}.top{align-items:flex-start}.navrow .btn{min-width:0;flex:1}}
+@media print{body{background:white}.wrap{width:100%;padding:0}.top,#home,#quiz,#result .btnrow,.foot{display:none!important}#result{display:block!important}.panel,.hero{box-shadow:none;border:0}.reporthead{break-inside:avoid}.reportgrid{display:block}.reportcard{margin:10px 0;break-inside:avoid}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand">🎮 <span>大学Online</span></div>
+    <div class="pill">20道情境题 · 6种大学人格</div>
+  </header>
+
+  <main>
+    <section id="home">
+      <div class="hero">
+        <div class="hero-art">
+          <div>
+            <div class="stars">✦ ✧ ✦ ✧ ✦</div>
+            <div class="pixel-sky" aria-hidden="true">🎓 🌱 🧭</div>
+            <div class="stars">✧ ✦ ✧ ✦ ✧</div>
+          </div>
+        </div>
+        <div class="hero-body">
+          <div class="topic">UNIVERSITY ONLINE · PLAYER TEST</div>
+          <h1>你的大学人生，<br>正在加载……</h1>
+          <p class="muted">20道大学生活情境题，解锁你的大学人格、六维属性和专属成长报告。</p>
+          <div class="btnrow">
+            <button class="btn primary" id="startBtn">开始测试　→</button>
+            <button class="btn secondary" id="typesBtn">查看六种人格</button>
+          </div>
+          <p class="disclaimer">本测试用于趣味性自我探索，不是经过标准化验证的心理测量量表，也不用于心理诊断。没有好坏人格，请根据平时真实的行为倾向作答。</p>
+        </div>
+      </div>
+      <div class="features">
+        <div class="feature"><strong>🧩 20道情境题</strong><span>没有标准答案</span></div>
+        <div class="feature"><strong>🌈 六维属性图</strong><span>看到不同倾向</span></div>
+        <div class="feature"><strong>💾 专属报告</strong><span>优势与成长建议</span></div>
+      </div>
+      <section id="typeGallery" class="panel hidden" style="margin-top:16px">
+        <h2>六种大学人格图鉴</h2>
+        <p class="muted">这些类型是帮助你反思大学生活方式的标签，不是固定身份或能力排名。</p>
+        <div id="galleryContent"></div>
+        <div class="btnrow"><button class="btn primary" id="galleryStart">开始测试</button></div>
+      </section>
+    </section>
+
+    <section id="quiz" class="panel hidden">
+      <div class="progressrow"><span>角色检测 · <span id="moduleName">学习与目标</span></span><strong id="counter">第 1 / 20 题</strong></div>
+      <div class="progress" role="progressbar" aria-label="答题进度" aria-valuemin="0" aria-valuemax="20" aria-valuenow="1" id="progress"><div id="progressFill" style="width:5%"></div></div>
+      <div class="topic" id="questionTopic">MODULE 01</div>
+      <h2 class="question" id="questionText"></h2>
+      <div class="options" id="optionList"></div>
+      <div id="quizNotice" class="notice hidden" role="status"></div>
+      <div class="navrow">
+        <button class="btn ghost" id="prevBtn">← 上一题</button>
+        <button class="btn primary" id="nextBtn">下一题 →</button>
+      </div>
+    </section>
+
+    <section id="result" class="panel hidden">
+      <div class="reporthead">
+        <div class="topic">PLAYER REPORT · 人格已解锁</div>
+        <div class="emoji" id="resultEmoji">🧭</div>
+        <div class="type-title" id="resultName">自由探索型</div>
+        <div id="resultTitle" class="muted"></div>
+        <p id="resultSummary"></p>
+        <div id="secondaryTags"></div>
+      </div>
+      <div class="reportgrid">
+        <section class="reportcard full">
+          <h3>📊 你的大学属性</h3>
+          <p class="muted small">分数表示你在本次自编题目中的相对倾向，不代表能力高低或心理健康程度。</p>
+          <div class="bars" id="scoreBars"></div>
+        </section>
+        <section class="reportcard">
+          <h3>✨ 典型行为倾向</h3>
+          <ul id="behaviors"></ul>
+        </section>
+        <section class="reportcard">
+          <h3>💪 可能的优势</h3>
+          <ul id="strengths"></ul>
+        </section>
+        <section class="reportcard">
+          <h3>🪞 可能的盲点</h3>
+          <ul id="blindspots"></ul>
+        </section>
+        <section class="reportcard">
+          <h3>🌱 成长建议</h3>
+          <ul id="advice"></ul>
+        </section>
+        <section class="reportcard full">
+          <h3>🧠 心理学概念参考</h3>
+          <p id="psychNote"></p>
+          <p class="muted small">这里的概念用于帮助理解行为倾向，并不意味着本测试测量了经过验证的心理学构念。</p>
+        </section>
+        <section class="reportcard full">
+          <h3>💾 给你的大学存档寄语</h3>
+          <div class="quote" id="quote"></div>
+        </section>
+      </div>
+      <div class="notice">重要说明：这是自编的趣味性自我探索测试，未经过正式信度、效度验证，不能用于心理诊断、临床判断或重大升学就业决策。人格倾向会随情境和经历变化，你不需要被一个结果定义。</div>
+      <div class="btnrow">
+        <button class="btn primary" id="printBtn">保存 / 打印报告</button>
+        <button class="btn secondary" id="restartBtn">重新测试</button>
+        <button class="btn ghost" id="homeBtn">返回首页</button>
+      </div>
+    </section>
+  </main>
+  <div class="foot">大学Online · 没有标准攻略，只有不断更新的自己。</div>
+</div>
+<div id="toast" class="hidden" role="status"></div>
+<script>
+const types = {
+ G:{code:"G",name:"稳步成长型",emoji:"🌱",title:"持续升级的积累者",keywords:"稳定 · 耐心 · 持续积累 · 自我接纳",
+ summary:"你更倾向于按照自己的节奏成长，不一定追求最快的速度，也不需要每次都成为最突出的人。对你来说，真正有意义的成长，是经过一段时间后发现自己比过去更加成熟、更加熟练，也更了解自己。",
+ behaviors:["更愿意把大任务拆解成可以逐步完成的小任务。","相比短期爆发，更重视长期积累。","面对暂时的失败，通常愿意调整后继续。","不一定喜欢激烈竞争，但希望自己有所进步。"],
+ strengths:["具有持续投入和稳定推进的潜力。","更容易关注长期变化，而不是只被一次成绩左右。","能在重复练习和经验积累中逐渐建立信心。"],
+ blindspots:["有时容易过于求稳，错过需要主动尝试的机会。","可能因为不愿打破现有节奏，而迟迟没有迈出第一步。"],
+ advice:["每个月主动尝试一件略有挑战的新事物。","记录自己的阶段性进步，而不只关注最终结果。","当熟悉的方法失效时，允许自己尝试不同的路径。"],
+ psych:"可联系到自我调节学习、持续目标投入和自我接纳等概念。这份趣味测试并未直接测量这些经过研究的构念。",
+ quote:"你不必每次都飞跃，只要持续前进。慢慢积累的经验，也会成为你独特的底气。"},
+ T:{code:"T",name:"目标攻略型",emoji:"⚔️",title:"主线任务规划师",keywords:"计划性 · 行动力 · 目标导向 · 问题解决",
+ summary:"你更习惯通过明确目标和具体行动推进大学生活。当任务出现时，你通常希望弄清楚要做什么、先做什么，以及怎样才能完成。清晰的计划会让你更有掌控感。",
+ behaviors:["喜欢制定学习计划和阶段目标。","面对问题时倾向于寻找解决办法。","对截止日期和任务进度比较敏感。","喜欢把复杂任务拆成具体步骤。"],
+ strengths:["有利于提高任务组织和执行效率。","更容易将想法转化为实际行动。","在目标明确、分工清楚的任务中容易发挥优势。"],
+ blindspots:["计划没有按预期推进时，可能产生挫败感。","也可能过度追求完成任务，而忽略休息、兴趣和情绪需要。"],
+ advice:["给计划预留缓冲时间，不把每一分钟都排满。","区分重要的事情和看起来很忙的事情。","当计划失败时，先调整方案，不急于否定自己。"],
+ psych:"可联系到目标设定、自我调节和问题解决等概念。本测试的分数不是执行功能或自律能力的标准化测量。",
+ quote:"计划可以帮你找到方向，但不必成为束缚。真正的攻略高手，也懂得什么时候调整路线。"},
+ E:{code:"E",name:"自由探索型",emoji:"🧭",title:"未知地图开拓者",keywords:"好奇心 · 开放性 · 灵活性 · 兴趣驱动",
+ summary:"你更愿意通过尝试和体验发现自己喜欢什么。对你而言，大学不仅是完成既定任务的阶段，也是一张可以不断探索的新地图。你不一定一开始就知道未来要走哪条路，但愿意了解不同的可能性。",
+ behaviors:["对新活动、新知识或新领域容易产生兴趣。","喜欢尝试不同的方法。","不愿过早把自己限定在单一路径中。","更看重真实体验带来的认识。"],
+ strengths:["有利于发现新的兴趣与发展方向。","面对变化时，可能更愿意尝试替代方案。","能够从不同经历中积累多样化的经验。"],
+ blindspots:["兴趣较多时容易分散注意力。","如果缺少阶段性目标，可能不断开始新的事情，却难以完成深入积累。"],
+ advice:["给每次新尝试设定一个清晰的小目标。","尝试一段时间后，再决定是否继续投入。","每学期选出一两件真正值得深入的事情。"],
+ psych:"可联系到开放性、好奇心和探索性学习等概念。但本测试并非标准化的大五人格或职业兴趣量表。",
+ quote:"你不必一开始就拿到完整攻略。探索本身，也可以成为找到方向的方式。"},
+ R:{code:"R",name:"关系联结型",emoji:"🤝",title:"团队连接者",keywords:"共情 · 合作 · 沟通 · 社会支持",
+ summary:"你比较重视人与人之间的连接。与朋友交流、共同完成任务或在困难时得到理解，往往能够提升你的参与感。你可能也愿意成为团队中协调关系、传递支持的人。",
+ behaviors:["比较在意他人的感受和沟通氛围。","喜欢和他人交流、合作或分享经验。","遇到困难时，愿意向信任的人寻求支持。","在小组任务中，倾向于关注成员之间的配合。"],
+ strengths:["有利于建立社会支持网络。","在合作和沟通场景中容易发现他人的需求。","能够为集体提供理解、协调和情感支持。"],
+ blindspots:["有时可能过度在意他人的评价。","可能为了维持关系而不愿表达不同意见，甚至承担超出能力范围的责任。"],
+ advice:["练习清晰表达自己的想法和需求。","记住，拒绝不合理的要求不等于破坏关系。","在帮助别人之前，也留意自己是否有足够的精力。"],
+ psych:"可联系到社会支持、共情和人际沟通等概念。本测试不测量临床意义上的共情能力或人际功能。",
+ quote:"你可以成为他人的支持，也值得被他人支持。良好的关系，不需要以忽略自己为代价。"},
+ A:{code:"A",name:"挑战进阶型",emoji:"🔥",title:"经验值突破者",keywords:"成就动机 · 自我突破 · 挑战意识 · 进取心",
+ summary:"你容易被具有挑战性的目标激发动力。参加竞赛、学习新技能、争取更好的结果，都可能让你感到充实。你希望通过不断突破自己的能力边界，看到更大的成长空间。",
+ behaviors:["愿意尝试有一定难度的任务。","对成绩、成果或阶段性突破比较敏感。","喜欢检验自己的能力。","在目标具有挑战性时，可能更容易投入精力。"],
+ strengths:["有利于推动自己走出熟悉的范围。","容易主动寻找成长机会。","在需要持续投入和追求成果的任务中可能表现积极。"],
+ blindspots:["容易把外部评价和个人价值联系得过紧。","也可能因不断追求更高标准而忽略已有的进步和身心状态。"],
+ advice:["将目标分为必须完成和挑战尝试两类。","定期记录自己的进步，而不只看排名。","允许自己休息，不必把每一次经历都变成竞争。"],
+ psych:"可联系到成就动机、目标追求和自我效能感等概念。但本测试并未验证这些心理构念，也不能判断一个人的成就动机水平。",
+ quote:"真正的升级，不只是获得更多成就，也包括更了解自己的节奏和边界。"},
+ B:{code:"B",name:"低耗平衡型",emoji:"🔋",title:"生活节奏管理师",keywords:"自我调节 · 生活平衡 · 边界感 · 节奏管理",
+ summary:"你比较重视自己的精力、生活质量和个人空间。你不一定愿意把所有时间都投入竞争或任务，更希望找到一种能够长期维持的生活方式。你看重的不是始终保持高强度，而是让学习、社交与休息之间形成适合自己的节奏。",
+ behaviors:["会考虑自己的精力和任务负担。","重视休息、独处和个人空间。","不愿仅仅因为别人都在做某件事，就盲目跟随。","更倾向于寻找能够长期坚持的安排。"],
+ strengths:["有利于关注精力管理和个人边界。","能够提醒自己避免长期超负荷。","更重视生活的整体质量，而不是单一指标。"],
+ blindspots:["如果缺少明确的行动计划，可能把短期休息变成长期拖延。","也可能因为不愿面对压力，而推迟必要的行动。"],
+ advice:["区分真正恢复精力的休息与习惯性回避任务。","给重要事情设定一个容易启动的最小行动。","在照顾自己和承担责任之间找到适合自己的平衡。"],
+ psych:"可联系到自我调节、恢复体验和个人边界等概念。本测试不能判断压力水平、倦怠或任何心理健康状况。",
+ quote:"不必把自己活成永远满格的电池。找到能够持续前进的节奏，比短暂地全速运行更重要。"}
+};
+const modules = [
+ {name:"学习与目标",label:"MODULE 01"},
+ {name:"压力与应对",label:"MODULE 02"},
+ {name:"社交与合作",label:"MODULE 03"},
+ {name:"兴趣与探索",label:"MODULE 04"},
+ {name:"生活与成长",label:"MODULE 05"}
+];
+const questions = [
+ {m:0,q:"突然接到一项需要一周内完成的小组作业，你通常会？",o:[["先梳理任务要求，制定大致计划，再逐步完成。","T"],["先了解组员的想法，商量好分工和合作方式。","R"],["先看看有没有新颖的思路或有趣的切入点。","E"],["先确定任务安排，给自己留出调整空间。","B"]]},
+ {m:0,q:"面对一门难度较大的课程，你更倾向于？",o:[["给自己设定阶段性目标，挑战更好的成绩。","A"],["按自己的节奏持续复习，不急于一下子掌握全部内容。","G"],["找同学讨论，通过交流理解不懂的知识。","R"],["尝试不同的学习方法，找到更适合自己的方式。","E"]]},
+ {m:0,q:"你发现自己的学习计划连续几天没有完成时，会怎么做？",o:[["重新安排任务优先级，让计划更容易执行。","T"],["先调整休息和学习的比例，恢复状态再继续。","B"],["复盘哪里出了问题，再给自己设定一个新的挑战目标。","A"],["不急于否定自己，先从一件小事开始恢复节奏。","G"]]},
+ {m:0,q:"你希望大学里的自己在哪方面有所进步？",o:[["更能理解和照顾他人，建立舒服的人际关系。","R"],["尝试过去没接触过的领域，拓宽自己的可能性。","E"],["提高自己的专业能力，并完成一个有挑战性的目标。","A"],["建立稳定、可持续的生活和学习习惯。","G"]]},
+ {m:1,q:"考试周、作业和社团任务撞在一起时，你通常会？",o:[["列出所有任务，按紧急程度和重要程度排序。","T"],["先处理最影响成绩或结果的任务，争取突破。","A"],["找朋友交流一下，必要时寻求帮助或重新协调分工。","R"],["评估自己的精力，安排休息，避免一直硬撑。","B"]]},
+ {m:1,q:"一次重要的尝试没有达到预期结果，你更可能？",o:[["总结这次经验，逐渐调整，下次争取做得更好。","G"],["研究失败的原因，尝试新的方案和路径。","E"],["把它当作一次挑战，尽快制定下一次行动计划。","A"],["先给自己一些缓冲时间，等状态恢复后再处理。","B"]]},
+ {m:1,q:"当你对未来感到迷茫时，你通常会？",o:[["列出几个可能方向，分别了解要求和行动步骤。","T"],["通过实习、活动、课程或实践来体验不同可能。","E"],["和信任的人聊聊，听听不同角度的建议。","R"],["允许自己暂时没有答案，先把当下生活过好。","G"]]},
+ {m:1,q:"当身边的人都在忙着考证、竞赛或准备升学时，你会？",o:[["选一个适合自己的目标，主动挑战一下。","A"],["先观察不同选择的实际价值，再决定是否参与。","E"],["按照自己的进度稳步推进，不急着与别人比较。","G"],["关注自己的精力和真实需求，不为了跟风把日程排满。","B"]]},
+ {m:2,q:"进入一个不太熟悉的集体时，你通常会？",o:[["主动和大家打招呼，尝试建立联系。","R"],["先观察环境和大家的互动方式，再决定如何融入。","E"],["给自己一点适应时间，慢慢建立稳定的关系。","G"],["先完成自己需要做的事情，等有合适的机会再交流。","T"]]},
+ {m:2,q:"小组成员之间出现意见分歧时，你更倾向于？",o:[["组织大家明确目标、梳理问题，推进解决。","T"],["先理解每个人的考虑，寻找都能接受的方案。","R"],["提出新的思路，看看能否跳出原有争论。","E"],["避免争论无限延长，明确合理边界和可接受的投入。","B"]]},
+ {m:2,q:"朋友最近情绪低落，向你倾诉时，你通常会？",o:[["认真倾听，先理解对方的感受和需要。","R"],["和对方一起梳理问题，寻找可以尝试的解决办法。","T"],["分享不同的看法或活动建议，帮助对方换个角度。","E"],["在力所能及的范围内陪伴对方，同时照顾自己的状态。","B"]]},
+ {m:2,q:"你更喜欢哪一种合作体验？",o:[["大家各自负责明确的部分，最后一起完成目标。","T"],["彼此支持、互相理解，过程本身也很重要。","R"],["能尝试新方法，不必每次都按照固定流程进行。","E"],["分工合理、节奏适中，不让合作长期挤占个人生活。","B"]]},
+ {m:3,q:"学校推出一个你以前从未接触过的新活动，你会？",o:[["先报名体验，再决定要不要深入参与。","E"],["如果它能帮助我实现一个目标，我会认真规划参与方式。","T"],["如果朋友也感兴趣，我会考虑一起参加。","R"],["先评估时间和精力，确认不会打乱已有安排再决定。","B"]]},
+ {m:3,q:"如果暂时不用考虑成绩和就业，你最希望？",o:[["挑战一项有难度的技能，看看自己能做到什么程度。","A"],["按照自己的兴趣慢慢学习，不必急于证明结果。","G"],["探索几个完全不同的领域，发现新的兴趣。","E"],["让生活更有规律，拥有充足的休息和个人时间。","B"]]},
+ {m:3,q:"当你发现自己对某件事很感兴趣时，你通常会？",o:[["先设定一个小目标，看看自己能否坚持完成。","T"],["先尝试不同方式，边体验边确定自己真正喜欢什么。","E"],["找志同道合的人一起交流、学习或参与。","R"],["让兴趣自然融入生活，不给自己过多的额外压力。","B"]]},
+ {m:3,q:"面对一个尚未确定的职业方向，你更愿意？",o:[["通过真实体验和信息搜集，逐步缩小选择范围。","E"],["制定探索计划，设定时间节点和阶段目标。","T"],["与有相关经验的人交流，了解不同道路的实际情况。","R"],["接受方向需要逐步形成，不要求自己马上做出决定。","G"]]},
+ {m:4,q:"回顾过去一个月，你最看重哪一种收获？",o:[["比以前更能稳定地坚持某件事情。","G"],["完成了一个曾经觉得有难度的目标。","A"],["和身边的人建立了更好的联系或相互支持。","R"],["找到了更适合自己的学习、休息和生活节奏。","B"]]},
+ {m:4,q:"当你看到同龄人取得很好的成绩或成果时，你更可能？",o:[["分析对方的方法，思考自己能采取哪些行动。","T"],["把对方的成果当作激励，给自己设定新的挑战。","A"],["认可彼此的道路不同，继续按自己的节奏积累。","G"],["关注自己真正感兴趣的方向，不把所有成果都当作必须追赶的目标。","E"]]},
+ {m:4,q:"如果你有一个完整的空闲周末，你更希望？",o:[["完成一个自己一直想挑战的项目或目标。","A"],["和朋友见面、聊天，享受有连接感的时光。","R"],["尝试一项新体验，去看看平时没注意过的事物。","E"],["好好休息，按自己的节奏安排生活。","B"]]},
+ {m:4,q:"如果可以给下学期的自己留下一条建议，你会选？",o:[["不用着急，持续积累，小进步也值得肯定。","G"],["把重要的事情落实成具体行动，不要总停留在想法里。","T"],["给自己设定一个值得挑战的目标，勇敢突破一次。","A"],["不必独自承担所有事情，学会沟通、合作和寻求支持。","R"]]}
+];
+const order=["G","T","E","R","A","B"];
+let answers=Array(questions.length).fill(null), current=0;
+const $=id=>document.getElementById(id);
+function show(id){["home","quiz","result"].forEach(x=>$(x).classList.toggle("hidden",x!==id));window.scrollTo({top:0,behavior:"smooth"});}
+function toast(msg){$("toast").textContent=msg;$("toast").classList.remove("hidden");setTimeout(()=>$("toast").classList.add("hidden"),2200);}
+function start(){answers=Array(questions.length).fill(null);current=0;renderQuestion();show("quiz");}
+function renderQuestion(){
+ const q=questions[current];$("counter").textContent=`第 ${current+1} / ${questions.length} 题`;
+ $("moduleName").textContent=modules[q.m].name;$("questionTopic").textContent=modules[q.m].label;
+ $("progressFill").style.width=`${(current+1)/questions.length*100}%`;
+ $("progress").setAttribute("aria-valuenow",String(current+1));$("questionText").textContent=q.q;
+ $("optionList").innerHTML="";
+ q.o.forEach((opt,i)=>{
+   const b=document.createElement("button");b.type="button";b.className="option"+(answers[current]===i?" selected":"");
+   b.setAttribute("aria-pressed",answers[current]===i?"true":"false");
+   const letter=document.createElement("span");letter.className="letter";letter.textContent="ABCD"[i];
+   const text=document.createElement("span");text.textContent=opt[0];b.append(letter,text);
+   b.addEventListener("click",()=>{answers[current]=i;renderQuestion();});$("optionList").appendChild(b);
+ });
+ $("prevBtn").disabled=current===0;$("prevBtn").style.opacity=current===0?".45":"1";
+ $("nextBtn").textContent=current===questions.length-1?"提交并生成报告 ✓":"下一题 →";
+ $("quizNotice").classList.add("hidden");
+}
+function next(){
+ if(answers[current]===null){$("quizNotice").textContent="请先选择一个选项，再继续。";$("quizNotice").classList.remove("hidden");return;}
+ if(current<questions.length-1){current++;renderQuestion();window.scrollTo({top:0,behavior:"smooth"});}
+ else{
+   const missing=answers.findIndex(a=>a===null);
+   if(missing!==-1){current=missing;renderQuestion();$("quizNotice").textContent="还有题目未完成，已带你返回未答题目。";$("quizNotice").classList.remove("hidden");return;}
+   showResult();
+ }
+}
+function prev(){if(current>0){current--;renderQuestion();}}
+function getScores(){
+ const raw={G:0,T:0,E:0,R:0,A:0,B:0}, max={G:0,T:0,E:0,R:0,A:0,B:0};
+ questions.forEach(q=>q.o.forEach(o=>max[o[1]]++));
+ answers.forEach((a,i)=>{if(a!==null)raw[questions[i].o[a][1]]++;});
+ const pct={};order.forEach(k=>pct[k]=Math.round(raw[k]/max[k]*100));
+ return {raw,max,pct};
+}
+function makeList(id,items){$(id).innerHTML="";items.forEach(t=>{const li=document.createElement("li");li.textContent=t;$(id).appendChild(li);});}
+function showResult(){
+ const s=getScores();const ranked=order.map(k=>({k,v:s.pct[k]})).sort((a,b)=>b.v-a.v);
+ const top=ranked[0], second=ranked[1], primary=types[top.k], secondary=types[second.k];
+ $("resultEmoji").textContent=primary.emoji;$("resultName").textContent=primary.name;$("resultTitle").textContent="专属称号："+primary.title;
+ $("resultSummary").textContent=primary.summary;
+ const tags=[];
+ if(top.v-second.v<=5){tags.push(`<span class="tag">复合倾向：${primary.name} × ${secondary.name}</span>`);}
+ else {tags.push(`<span class="tag">次要倾向：${secondary.name}</span>`);}
+ tags.push(`<span class="tag">${primary.keywords}</span>`);$("secondaryTags").innerHTML=tags.join("");
+ $("scoreBars").innerHTML="";
+ order.forEach(k=>{
+   const t=types[k],v=s.pct[k];const row=document.createElement("div");row.innerHTML=`<div class="barlabel"><span>${t.emoji} ${t.name}</span><strong>${v}/100</strong></div><div class="bartrack"><div class="barfill" style="width:${v}%"></div></div>`;$("scoreBars").appendChild(row);
+ });
+ makeList("behaviors",primary.behaviors);makeList("strengths",primary.strengths);makeList("blindspots",primary.blindspots);makeList("advice",primary.advice);
+ $("psychNote").textContent=primary.psych;$("quote").textContent=primary.quote;
+ show("result");
+}
+function gallery(){
+ $("galleryContent").innerHTML="";
+ order.forEach(k=>{const t=types[k];const card=document.createElement("div");card.className="reportcard";card.style.margin="10px 0";card.innerHTML=`<h3>${t.emoji} ${t.name}</h3><div class="muted small">${t.title}</div><p>${t.summary}</p><div class="small"><strong>核心特质：</strong>${t.keywords}</div>`;$("galleryContent").appendChild(card);});
+ const g=$("typeGallery");g.classList.toggle("hidden");
+ if(!g.classList.contains("hidden"))g.scrollIntoView({behavior:"smooth",block:"start"});
+}
+$("startBtn").addEventListener("click",start);$("galleryStart").addEventListener("click",start);$("typesBtn").addEventListener("click",gallery);
+$("prevBtn").addEventListener("click",prev);$("nextBtn").addEventListener("click",next);
+$("printBtn").addEventListener("click",()=>window.print());
+$("restartBtn").addEventListener("click",start);
+$("homeBtn").addEventListener("click",()=>show("home"));
+gallery();
+$("typeGallery").classList.add("hidden");
+</script>
+</body>
+</html>
